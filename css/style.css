@@ -405,7 +405,7 @@ p  { color: var(--muted); }
 .belief p:last-child { margin-bottom: 0; }
 .belief strong { color: var(--text); font-weight: 600; }
 
-/* ============ SERVICES ============ */
+/* ============ SERVICES (legacy card — kept for safety) ============ */
 .service {
   padding: 32px 28px;
   border-radius: 18px;
@@ -416,7 +416,6 @@ p  { color: var(--muted); }
   overflow: hidden;
   box-shadow: 0 4px 18px -12px rgba(10, 37, 64, 0.08);
 }
-/* Small chevron accent in the corner of each service card */
 .service::after {
   content: '';
   position: absolute;
@@ -484,7 +483,6 @@ p  { color: var(--muted); }
   position: relative;
   overflow: hidden;
 }
-/* Faint chevron watermark in the footer */
 .site-footer::before {
   content: '';
   position: absolute;
@@ -564,7 +562,7 @@ p  { color: var(--muted); }
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .reveal.in { opacity: 1; transform: translateY(0); }
 
-/* ============ RESPONSIVE ============ */
+/* ============ RESPONSIVE (global) ============ */
 @media (max-width: 860px) {
   .section { padding: 70px 0; }
   .belief { padding: 40px 28px; }
@@ -580,6 +578,7 @@ p  { color: var(--muted); }
   .footer-bottom { flex-direction: column; text-align: center; }
   body::before { background-size: auto, auto, 200px 200px; }
 }
+
 /* ============ QUOTE LIST (About page) ============ */
 .quote-list {
   list-style: none;
@@ -649,14 +648,308 @@ p  { color: var(--muted); }
   border-radius: 2px;
   background: linear-gradient(90deg, #0066ff, #00c9a7);
 }
+
+/* =========================================================
+   WHAT CAN WE DO FOR YOU — Service Tiles
+   ========================================================= */
+
+.services-section {
+  position: relative;
+  padding-top: 90px;
+  padding-bottom: 90px;
+}
+
+.services-intro {
+  max-width: 780px;
+  margin-bottom: 56px;
+}
+.services-intro .section-num {
+  display: inline-block;
+  margin-bottom: 16px;
+}
+.services-intro h2 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+.services-intro .lead {
+  font-size: 1.08rem;
+  line-height: 1.75;
+  color: var(--text-soft);
+  max-width: 680px;
+}
+
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+.tile {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 34px 32px 28px;
+  box-shadow: 0 4px 20px -14px rgba(10, 37, 64, 0.12);
+  transition:
+    transform   0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.35s ease,
+    box-shadow  0.35s ease;
+  overflow: hidden;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+
+  opacity: 0;
+  transform: translateY(36px) scale(0.98);
+}
+.tile.reveal.in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition:
+    opacity   0.7s ease,
+    transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.35s ease,
+    box-shadow  0.35s ease;
+}
+.tile[data-delay="1"].reveal.in { transition-delay: 0.08s; }
+.tile[data-delay="2"].reveal.in { transition-delay: 0.16s; }
+.tile[data-delay="3"].reveal.in { transition-delay: 0.24s; }
+.tile[data-delay="4"].reveal.in { transition-delay: 0.32s; }
+
+.tile::before {
+  content: '';
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 180px; height: 180px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><g fill='none' stroke='%230066ff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' opacity='0.12'><path d='M20 58 L50 28 L80 58'/><path d='M20 78 L50 48 L80 78'/></g><circle cx='80' cy='28' r='5' fill='%23ffb800' opacity='0.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.5s ease, transform 0.6s ease;
+  opacity: 0.9;
+}
+
+.tile:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0, 102, 255, 0.35);
+  box-shadow: 0 26px 50px -28px rgba(10, 37, 64, 0.28);
+}
+.tile:hover::before {
+  opacity: 1;
+  transform: scale(1.06);
+}
+
+.tile-featured {
+  background: linear-gradient(160deg, #ffffff 55%, #f4f8ff 100%);
+  border-color: rgba(0, 102, 255, 0.18);
+}
+.tile-featured .tile-num {
+  color: #ffffff;
+  background: linear-gradient(135deg, #0066ff, #0047b3);
+  box-shadow: 0 6px 18px -8px rgba(0, 102, 255, 0.6);
+}
+.tile-featured .tile-icon { color: var(--accent); }
+
+.tile-wide {
+  grid-column: 1 / -1;
+  padding-right: 60px;
+}
+.tile-wide::before {
+  right: -20px;
+  width: 220px;
+  height: 220px;
+  opacity: 0.7;
+}
+
+.tile-num {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  font-family: 'Montserrat', 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  background: rgba(0, 102, 255, 0.08);
+  border: 1px solid rgba(0, 102, 255, 0.15);
+  margin-bottom: 20px;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.tile:hover .tile-num {
+  transform: translateY(-2px) rotate(-4deg);
+}
+
+.tile-icon {
+  position: relative;
+  z-index: 1;
+  width: 44px;
+  height: 44px;
+  color: var(--navy);
+  margin-bottom: 16px;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), color 0.3s ease;
+}
+.tile-icon svg { width: 100%; height: 100%; }
+.tile:hover .tile-icon {
+  transform: translateY(-2px) scale(1.06);
+  color: var(--accent);
+}
+
+.tile h3 {
+  position: relative;
+  z-index: 1;
+  font-size: 1.25rem;
+  line-height: 1.3;
+  color: var(--navy);
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+  max-width: 340px;
+}
+
+.tile-list {
+  position: relative;
+  z-index: 1;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.tile-list li {
+  position: relative;
+  padding-left: 24px;
+  font-size: 0.94rem;
+  line-height: 1.55;
+  color: var(--text-soft);
+}
+.tile-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 12px;
+  height: 12px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M7 15 L12 10 L17 15' fill='none' stroke='%230066ff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: transform 0.3s ease;
+}
+.tile:hover .tile-list li::before {
+  transform: translateY(-1px);
+}
+
+.tile-list-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 32px;
+  row-gap: 9px;
+}
+
+.tile-blurb {
+  position: relative;
+  z-index: 1;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-soft);
+  margin-bottom: 18px;
+  max-width: 720px;
+}
+
+.tile-cta {
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  padding-top: 4px;
+}
+.tile-cta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--accent);
+  transition: gap 0.3s ease, color 0.25s ease;
+}
+.tile-cta a span {
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.tile-cta a:hover { gap: 10px; }
+.tile-cta a:hover span { transform: translateX(2px); }
+
+.services-outro {
+  margin-top: 60px;
+  text-align: center;
+  padding: 48px 32px;
+  background: linear-gradient(145deg, #f4f8ff, #ffffff);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  position: relative;
+  overflow: hidden;
+}
+.services-outro::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><g fill='none' stroke='%230066ff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' opacity='0.06'><path d='M40 110 L100 50 L160 110'/><path d='M40 150 L100 90 L160 150'/></g><circle cx='160' cy='50' r='8' fill='%23ffb800' opacity='0.16'/></svg>");
+  background-size: 260px 260px;
+  background-repeat: repeat;
+  pointer-events: none;
+}
+.services-outro::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 50%, transparent 35%, rgba(255, 255, 255, 0.85) 100%);
+  pointer-events: none;
+}
+.services-outro > * { position: relative; z-index: 1; }
+.services-outro p {
+  font-size: 1.05rem;
+  color: var(--text-soft);
+  max-width: 520px;
+  margin: 0 auto 22px;
+}
+
+@media (max-width: 900px) {
+  .tile-grid { gap: 18px; }
+  .tile { padding: 28px 26px 24px; }
+  .tile h3 { font-size: 1.15rem; }
+  .tile-wide { padding-right: 40px; }
+  .tile-list-cols { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+  .tile-grid { grid-template-columns: 1fr; gap: 16px; }
+  .services-intro { margin-bottom: 40px; }
+  .tile-wide { padding-right: 26px; }
+  .tile::before { width: 140px; height: 140px; top: -20px; right: -20px; }
+}
+@media (max-width: 480px) {
+  .services-section { padding-top: 60px; padding-bottom: 60px; }
+  .tile { padding: 24px 20px 20px; border-radius: 16px; }
+  .tile-num { width: 34px; height: 34px; font-size: 13px; margin-bottom: 16px; }
+  .tile-icon { width: 38px; height: 38px; margin-bottom: 12px; }
+  .tile h3 { font-size: 1.08rem; margin-bottom: 14px; }
+  .tile-list li { font-size: 0.9rem; padding-left: 22px; }
+  .tile-list li::before { width: 11px; height: 11px; }
+  .services-outro { padding: 36px 22px; margin-top: 40px; }
+  .services-outro p { font-size: 0.98rem; }
+}
+
 /* =========================================================
    CONTACT MODAL — Bubble pop open/close (no scrollbar)
    ========================================================= */
 
-/* Prevent background scroll */
 body.modal-lock { overflow: hidden; }
 
-/* ---------- Backdrop ---------- */
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -689,15 +982,12 @@ body.modal-lock { overflow: hidden; }
     backdrop-filter 0.4s ease;
 }
 
-/* ---------- Card ---------- */
 .modal-card {
   position: relative;
   width: 100%;
   max-width: 600px;
-
-  /* Fit fully in viewport — no scrollbar */
   max-height: calc(100dvh - 40px);
-  overflow: hidden;               /* ← no scroll */
+  overflow: hidden;
 
   background: #ffffff;
   border: 1px solid var(--border);
@@ -707,7 +997,6 @@ body.modal-lock { overflow: hidden; }
     0 40px 80px -30px rgba(10, 37, 64, 0.35),
     0 12px 30px -12px rgba(10, 37, 64, 0.15);
 
-  /* BUBBLE OPEN */
   transform: scale(0.72) translateY(20px);
   opacity: 0;
   filter: blur(6px);
@@ -722,12 +1011,10 @@ body.modal-lock { overflow: hidden; }
   filter: blur(0);
 }
 
-/* Fallback for browsers without dvh */
 @supports not (height: 100dvh) {
   .modal-card { max-height: calc(100vh - 40px); }
 }
 
-/* Gentle shake on validation error */
 @keyframes cardShake {
   0%, 100% { transform: translateX(0); }
   20%      { transform: translateX(-6px); }
@@ -737,7 +1024,6 @@ body.modal-lock { overflow: hidden; }
 }
 .modal-card.shake { animation: cardShake 0.45s ease; }
 
-/* ---------- Close X ---------- */
 .modal-close-x {
   position: absolute;
   top: 14px; right: 14px;
@@ -761,7 +1047,6 @@ body.modal-lock { overflow: hidden; }
   transform: rotate(90deg);
 }
 
-/* ---------- Floating bubbles (decoration) ---------- */
 .bubble {
   position: absolute;
   border-radius: 50%;
@@ -803,7 +1088,6 @@ body.modal-lock { overflow: hidden; }
 .modal-backdrop.is-open .bubble-4 { animation: floatY 3.8s ease-in-out 0.6s infinite; }
 .modal-backdrop.is-open .bubble-5 { animation: floatY 2.8s ease-in-out 0.9s infinite; }
 
-/* ---------- Head ---------- */
 .modal-head { text-align: center; margin-bottom: 20px; }
 .modal-mark {
   width: 44px; height: 44px;
@@ -825,7 +1109,6 @@ body.modal-lock { overflow: hidden; }
   line-height: 1.5;
 }
 
-/* ---------- Form ---------- */
 .contact-form { display: grid; gap: 14px; }
 
 .field-row {
@@ -870,7 +1153,7 @@ body.modal-lock { overflow: hidden; }
 }
 
 .field textarea {
-  resize: none;             /* prevents manual resize → keeps box compact */
+  resize: none;
   min-height: 74px;
   line-height: 1.5;
 }
@@ -900,7 +1183,6 @@ body.modal-lock { overflow: hidden; }
 }
 .field-error:not(:empty) { min-height: 14px; }
 
-/* ---------- Actions ---------- */
 .modal-actions {
   display: flex;
   justify-content: flex-end;
@@ -922,7 +1204,6 @@ body.modal-lock { overflow: hidden; }
 .btn.is-loading .btn-label { opacity: 0.85; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ---------- Thank-you view ---------- */
 .modal-view-thanks { text-align: center; padding: 14px 0 6px; }
 .thanks-mark {
   width: 76px; height: 76px;
@@ -949,10 +1230,9 @@ body.modal-lock { overflow: hidden; }
 .modal-view-thanks p strong { color: var(--accent); font-weight: 600; }
 
 /* =========================================================
-   RESPONSIVE — everything fits, no scrollbars
+   RESPONSIVE — Contact Modal
    ========================================================= */
 
-/* Tablets / small laptops */
 @media (max-width: 860px) {
   .modal-backdrop { padding: 18px; }
   .modal-card {
@@ -964,7 +1244,6 @@ body.modal-lock { overflow: hidden; }
   .bubble-3 { width: 46px; height: 46px; bottom: 6%; left: 4%; }
 }
 
-/* iPad portrait & large phones */
 @media (max-width: 640px) {
   .modal-backdrop { padding: 12px; }
   .modal-card {
@@ -1000,7 +1279,6 @@ body.modal-lock { overflow: hidden; }
   .modal-view-thanks p { font-size: 0.9rem; margin-bottom: 18px; }
 }
 
-/* Small phones */
 @media (max-width: 400px) {
   .modal-card { padding: 22px 16px 16px; }
   .field input,
@@ -1012,7 +1290,6 @@ body.modal-lock { overflow: hidden; }
   .field textarea { min-height: 60px; }
 }
 
-/* Short landscape phones — squeeze further */
 @media (max-height: 640px) and (orientation: landscape) {
   .modal-backdrop { padding: 10px; }
   .modal-card {
@@ -1031,4 +1308,20 @@ body.modal-lock { overflow: hidden; }
   .field textarea { padding: 7px 11px; font-size: 13.5px; }
   .field textarea { min-height: 52px; }
   .modal-actions .btn { padding: 9px 18px; font-size: 13px; }
+}
+
+/* =========================================================
+   REDUCED MOTION — respect user preference
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .tile.reveal { opacity: 1; transform: none; }
+  .reveal       { opacity: 1; transform: none; }
 }
