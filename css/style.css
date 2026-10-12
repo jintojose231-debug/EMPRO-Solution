@@ -650,7 +650,7 @@ p  { color: var(--muted); }
   background: linear-gradient(90deg, #0066ff, #00c9a7);
 }
 /* =========================================================
-   CONTACT MODAL — Bubble pop open/close
+   CONTACT MODAL — Bubble pop open/close (no scrollbar)
    ========================================================= */
 
 /* Prevent background scroll */
@@ -664,7 +664,7 @@ body.modal-lock { overflow: hidden; }
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
+  padding: 20px;
 
   background: rgba(10, 37, 64, 0.28);
   backdrop-filter: blur(0px);
@@ -693,13 +693,16 @@ body.modal-lock { overflow: hidden; }
 .modal-card {
   position: relative;
   width: 100%;
-  max-width: 620px;
-  max-height: calc(100vh - 48px);
-  overflow-y: auto;
+  max-width: 600px;
+
+  /* Fit fully in viewport — no scrollbar */
+  max-height: calc(100dvh - 40px);
+  overflow: hidden;               /* ← no scroll */
+
   background: #ffffff;
   border: 1px solid var(--border);
   border-radius: 24px;
-  padding: 44px 44px 36px;
+  padding: 36px 40px 28px;
   box-shadow:
     0 40px 80px -30px rgba(10, 37, 64, 0.35),
     0 12px 30px -12px rgba(10, 37, 64, 0.15);
@@ -719,6 +722,11 @@ body.modal-lock { overflow: hidden; }
   filter: blur(0);
 }
 
+/* Fallback for browsers without dvh */
+@supports not (height: 100dvh) {
+  .modal-card { max-height: calc(100vh - 40px); }
+}
+
 /* Gentle shake on validation error */
 @keyframes cardShake {
   0%, 100% { transform: translateX(0); }
@@ -729,16 +737,11 @@ body.modal-lock { overflow: hidden; }
 }
 .modal-card.shake { animation: cardShake 0.45s ease; }
 
-/* Thin scrollbar */
-.modal-card::-webkit-scrollbar { width: 8px; }
-.modal-card::-webkit-scrollbar-thumb { background: #d3dae5; border-radius: 4px; }
-.modal-card::-webkit-scrollbar-thumb:hover { background: #b8c2d1; }
-
 /* ---------- Close X ---------- */
 .modal-close-x {
   position: absolute;
-  top: 16px; right: 16px;
-  width: 40px; height: 40px;
+  top: 14px; right: 14px;
+  width: 36px; height: 36px;
   border-radius: 50%;
   background: #f4f8ff;
   border: 1px solid var(--border);
@@ -750,7 +753,7 @@ body.modal-lock { overflow: hidden; }
   transition: background 0.25s ease, transform 0.25s ease, color 0.25s ease;
   z-index: 3;
 }
-.modal-close-x svg { width: 16px; height: 16px; }
+.modal-close-x svg { width: 15px; height: 15px; }
 .modal-close-x:hover {
   background: var(--accent);
   color: #fff;
@@ -778,19 +781,18 @@ body.modal-lock { overflow: hidden; }
   opacity: 0.85;
   transform: scale(1);
 }
-.bubble-1 { width: 46px; height: 46px; top: 8%;  left: 6%;  transition-delay: 0.15s; }
-.bubble-2 { width: 26px; height: 26px; top: 18%; right: 8%; transition-delay: 0.25s;
+.bubble-1 { width: 44px; height: 44px; top: 7%;  left: 5%;  transition-delay: 0.15s; }
+.bubble-2 { width: 24px; height: 24px; top: 16%; right: 7%; transition-delay: 0.25s;
             background: radial-gradient(circle at 30% 30%, #fff, transparent 55%),
                         linear-gradient(135deg, #ffb800, #ff8a00); }
-.bubble-3 { width: 60px; height: 60px; bottom: 10%; left: 10%; transition-delay: 0.3s;
+.bubble-3 { width: 56px; height: 56px; bottom: 9%; left: 8%; transition-delay: 0.3s;
             background: radial-gradient(circle at 30% 30%, #fff, transparent 55%),
                         linear-gradient(135deg, #00c9a7, #0066ff); }
-.bubble-4 { width: 34px; height: 34px; bottom: 14%; right: 12%; transition-delay: 0.2s; }
-.bubble-5 { width: 18px; height: 18px; top: 46%; left: 3%; transition-delay: 0.35s;
+.bubble-4 { width: 32px; height: 32px; bottom: 12%; right: 10%; transition-delay: 0.2s; }
+.bubble-5 { width: 16px; height: 16px; top: 46%; left: 2%; transition-delay: 0.35s;
             background: radial-gradient(circle at 30% 30%, #fff, transparent 55%),
                         linear-gradient(135deg, #0a2540, #33415a); }
 
-/* Gentle idle float */
 @keyframes floatY {
   0%, 100% { transform: translateY(0)    scale(1); }
   50%      { transform: translateY(-10px) scale(1.03); }
@@ -802,38 +804,40 @@ body.modal-lock { overflow: hidden; }
 .modal-backdrop.is-open .bubble-5 { animation: floatY 2.8s ease-in-out 0.9s infinite; }
 
 /* ---------- Head ---------- */
-.modal-head { text-align: center; margin-bottom: 28px; }
+.modal-head { text-align: center; margin-bottom: 20px; }
 .modal-mark {
-  width: 52px; height: 52px;
-  margin: 0 auto 14px;
+  width: 44px; height: 44px;
+  margin: 0 auto 10px;
   display: flex; align-items: center; justify-content: center;
 }
 .modal-mark svg { width: 100%; height: 100%; }
 .modal-head h3 {
-  font-size: 1.5rem;
-  margin-bottom: 8px;
+  font-size: 1.35rem;
+  margin-bottom: 6px;
   color: var(--navy);
+  line-height: 1.2;
 }
 .modal-head p {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--muted);
-  max-width: 420px;
+  max-width: 400px;
   margin: 0 auto;
+  line-height: 1.5;
 }
 
 /* ---------- Form ---------- */
-.contact-form { display: grid; gap: 18px; }
+.contact-form { display: grid; gap: 14px; }
 
 .field-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 14px;
 }
 
-.field { display: flex; flex-direction: column; gap: 6px; }
+.field { display: flex; flex-direction: column; gap: 4px; }
 
 .field label {
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
   color: var(--text);
   letter-spacing: 0.01em;
@@ -845,12 +849,12 @@ body.modal-lock { overflow: hidden; }
 .field select,
 .field textarea {
   font-family: inherit;
-  font-size: 15px;
+  font-size: 14.5px;
   color: var(--text);
   background: #ffffff;
   border: 1.5px solid var(--border);
-  border-radius: 12px;
-  padding: 12px 14px;
+  border-radius: 11px;
+  padding: 10px 13px;
   width: 100%;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
   outline: none;
@@ -865,16 +869,20 @@ body.modal-lock { overflow: hidden; }
   box-shadow: 0 0 0 4px rgba(0, 102, 255, 0.12);
 }
 
-.field textarea { resize: vertical; min-height: 100px; line-height: 1.55; }
+.field textarea {
+  resize: none;             /* prevents manual resize → keeps box compact */
+  min-height: 74px;
+  line-height: 1.5;
+}
 
 .field select {
   appearance: none;
   -webkit-appearance: none;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'><path d='M1 1 L6 6 L11 1' fill='none' stroke='%2364748b' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/></svg>");
   background-repeat: no-repeat;
-  background-position: right 14px center;
-  background-size: 12px;
-  padding-right: 38px;
+  background-position: right 13px center;
+  background-size: 11px;
+  padding-right: 34px;
   cursor: pointer;
 }
 
@@ -885,23 +893,22 @@ body.modal-lock { overflow: hidden; }
   box-shadow: 0 0 0 4px rgba(224, 66, 66, 0.1);
 }
 .field-error {
-  font-size: 12px;
+  font-size: 11.5px;
   color: #e04242;
   min-height: 0;
   transition: min-height 0.2s ease;
 }
-.field-error:not(:empty) { min-height: 16px; }
+.field-error:not(:empty) { min-height: 14px; }
 
 /* ---------- Actions ---------- */
 .modal-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 12px;
-  margin-top: 6px;
+  gap: 10px;
+  margin-top: 4px;
 }
-.modal-actions .btn { padding: 12px 24px; }
+.modal-actions .btn { padding: 11px 22px; font-size: 13.5px; }
 
-/* Submit button loading spinner */
 .btn-spinner {
   display: none;
   width: 14px; height: 14px;
@@ -916,10 +923,10 @@ body.modal-lock { overflow: hidden; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* ---------- Thank-you view ---------- */
-.modal-view-thanks { text-align: center; padding: 20px 0 10px; }
+.modal-view-thanks { text-align: center; padding: 14px 0 6px; }
 .thanks-mark {
-  width: 90px; height: 90px;
-  margin: 0 auto 20px;
+  width: 76px; height: 76px;
+  margin: 0 auto 16px;
   animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .thanks-mark svg { width: 100%; height: 100%; overflow: visible; }
@@ -928,56 +935,100 @@ body.modal-lock { overflow: hidden; }
   100% { transform: scale(1);   opacity: 1; }
 }
 .modal-view-thanks h3 {
-  font-size: 1.6rem;
+  font-size: 1.45rem;
   color: var(--navy);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 .modal-view-thanks p {
   color: var(--text-soft);
-  font-size: 1rem;
-  line-height: 1.7;
-  max-width: 400px;
-  margin: 0 auto 28px;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  max-width: 380px;
+  margin: 0 auto 22px;
 }
 .modal-view-thanks p strong { color: var(--accent); font-weight: 600; }
 
 /* =========================================================
-   RESPONSIVE — desktop, laptop, tablet, iPad, mobile
+   RESPONSIVE — everything fits, no scrollbars
    ========================================================= */
 
 /* Tablets / small laptops */
 @media (max-width: 860px) {
-  .modal-backdrop { padding: 20px; }
-  .modal-card { padding: 40px 32px 32px; border-radius: 22px; }
-  .bubble-3 { width: 50px; height: 50px; bottom: 6%; left: 5%; }
-  .bubble-1 { width: 38px; height: 38px; }
+  .modal-backdrop { padding: 18px; }
+  .modal-card {
+    padding: 32px 30px 24px;
+    border-radius: 22px;
+    max-height: calc(100dvh - 36px);
+  }
+  .bubble-1 { width: 36px; height: 36px; }
+  .bubble-3 { width: 46px; height: 46px; bottom: 6%; left: 4%; }
 }
 
 /* iPad portrait & large phones */
 @media (max-width: 640px) {
-  .modal-backdrop { padding: 16px; align-items: flex-start; }
+  .modal-backdrop { padding: 12px; }
   .modal-card {
-    padding: 36px 22px 26px;
-    border-radius: 20px;
-    max-height: calc(100vh - 32px);
-    margin-top: 8px;
+    padding: 26px 20px 18px;
+    border-radius: 18px;
+    max-height: calc(100dvh - 24px);
   }
-  .field-row { grid-template-columns: 1fr; gap: 14px; }
-  .modal-head h3 { font-size: 1.35rem; }
+
+  .modal-head { margin-bottom: 14px; }
+  .modal-mark { width: 36px; height: 36px; margin-bottom: 8px; }
+  .modal-head h3 { font-size: 1.2rem; }
+  .modal-head p { font-size: 0.85rem; }
+
+  .contact-form { gap: 11px; }
+  .field-row { grid-template-columns: 1fr; gap: 11px; }
+  .field label { font-size: 12px; }
+  .field input,
+  .field select,
+  .field textarea { padding: 9px 12px; font-size: 14px; border-radius: 10px; }
+  .field textarea { min-height: 66px; }
+
   .modal-actions {
     flex-direction: column-reverse;
-    gap: 10px;
+    gap: 8px;
+    margin-top: 2px;
   }
-  .modal-actions .btn { width: 100%; justify-content: center; }
+  .modal-actions .btn { width: 100%; justify-content: center; padding: 11px 20px; }
+
   .bubble-1, .bubble-2, .bubble-4, .bubble-5 { display: none; }
-  .bubble-3 { width: 40px; height: 40px; opacity: 0.6; }
-  .thanks-mark { width: 74px; height: 74px; }
-  .modal-view-thanks h3 { font-size: 1.4rem; }
+  .bubble-3 { width: 34px; height: 34px; opacity: 0.6; }
+  .thanks-mark { width: 64px; height: 64px; margin-bottom: 12px; }
+  .modal-view-thanks h3 { font-size: 1.25rem; }
+  .modal-view-thanks p { font-size: 0.9rem; margin-bottom: 18px; }
 }
 
 /* Small phones */
 @media (max-width: 400px) {
-  .modal-card { padding: 32px 18px 22px; }
-  .field input, .field select, .field textarea { font-size: 16px; } /* prevents iOS zoom */
-  .modal-close-x { width: 36px; height: 36px; top: 12px; right: 12px; }
+  .modal-card { padding: 22px 16px 16px; }
+  .field input,
+  .field select,
+  .field textarea { font-size: 16px; }   /* prevents iOS zoom */
+  .modal-close-x { width: 32px; height: 32px; top: 10px; right: 10px; }
+  .modal-head h3 { font-size: 1.1rem; }
+  .modal-head p  { font-size: 0.8rem; }
+  .field textarea { min-height: 60px; }
+}
+
+/* Short landscape phones — squeeze further */
+@media (max-height: 640px) and (orientation: landscape) {
+  .modal-backdrop { padding: 10px; }
+  .modal-card {
+    padding: 18px 22px 14px;
+    max-height: calc(100dvh - 20px);
+    border-radius: 16px;
+  }
+  .modal-mark { display: none; }
+  .modal-head { margin-bottom: 10px; }
+  .modal-head h3 { font-size: 1.05rem; margin-bottom: 2px; }
+  .modal-head p  { font-size: 0.78rem; }
+  .contact-form { gap: 8px; }
+  .field-row { gap: 8px; }
+  .field input,
+  .field select,
+  .field textarea { padding: 7px 11px; font-size: 13.5px; }
+  .field textarea { min-height: 52px; }
+  .modal-actions .btn { padding: 9px 18px; font-size: 13px; }
 }
