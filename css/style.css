@@ -580,3 +580,72 @@ p  { color: var(--muted); }
   .footer-bottom { flex-direction: column; text-align: center; }
   body::before { background-size: auto, auto, 200px 200px; }
 }
+/* ============ QUOTE LIST (About page) ============ */
+.quote-list {
+  list-style: none;
+  display: grid;
+  gap: 14px;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.quote-list li {
+  position: relative;
+  padding: 20px 24px 20px 56px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  color: var(--text-soft);
+  font-size: 1rem;
+  line-height: 1.6;
+  font-style: italic;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 18px -12px rgba(10, 37, 64, 0.08);
+}
+
+/* Chevron bullet — echoes the logo */
+.quote-list li::before {
+  content: '';
+  position: absolute;
+  left: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M6 16 L12 10 L18 16' fill='none' stroke='%230066ff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><circle cx='18' cy='10' r='1.8' fill='%23ffb800'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.quote-list li:hover {
+  transform: translateX(4px);
+  border-color: rgba(0, 102, 255, 0.4);
+  box-shadow: 0 14px 30px -18px rgba(0, 102, 255, 0.3);
+}
+
+/* ============ CLOSING LINE ============ */
+.closing-line {
+  max-width: 780px;
+  margin: 40px auto 0;
+  text-align: center;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--text);
+  font-family: 'Montserrat', 'Inter', sans-serif;
+  letter-spacing: -0.01em;
+  position: relative;
+  padding-top: 28px;
+}
+
+.closing-line::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #0066ff, #00c9a7);
+}
