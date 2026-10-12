@@ -43,18 +43,14 @@ body::before {
   z-index: -2;
   background-color: #ffffff;
   background-image:
-    /* Soft blue radial glow (echoes the accent chevron) */
     radial-gradient(circle at 15% 12%, rgba(0, 102, 255, 0.055) 0%, transparent 42%),
-    /* Soft gold glow (echoes the dot) */
     radial-gradient(circle at 88% 78%, rgba(255, 184, 0, 0.06) 0%, transparent 38%),
-    /* Chevron motif — same shape as the logo, tiled */
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'><g fill='none' stroke='%230a2540' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' opacity='0.07'><path d='M30 100 L90 40 L150 100'/><path d='M30 150 L90 90 L150 150'/><circle cx='150' cy='40' r='5' fill='%23ffb800' stroke='none' opacity='0.55'/></g></svg>");
   background-size: auto, auto, 340px 340px;
   background-repeat: no-repeat, no-repeat, repeat;
   background-attachment: fixed, fixed, fixed;
 }
 
-/* A very light vignette so content always reads well */
 body::after {
   content: '';
   position: fixed;
@@ -142,7 +138,6 @@ p  { color: var(--muted); }
   text-align: center;
 }
 
-/* Large chevron watermark behind hero text — echoes the logo */
 .hero::before {
   content: '';
   position: absolute;
@@ -167,7 +162,6 @@ p  { color: var(--muted); }
   transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-/* ===== Animated Hero Logo ===== */
 .hero-logo {
   display: flex;
   flex-direction: column;
@@ -350,7 +344,6 @@ p  { color: var(--muted); }
   overflow: hidden;
 }
 
-/* Same logo watermark, smaller, on the page hero */
 .page-hero::before {
   content: '';
   position: absolute;
@@ -405,7 +398,7 @@ p  { color: var(--muted); }
 .belief p:last-child { margin-bottom: 0; }
 .belief strong { color: var(--text); font-weight: 600; }
 
-/* ============ SERVICES (legacy card — kept for safety) ============ */
+/* ============ SERVICES (legacy) ============ */
 .service {
   padding: 32px 28px;
   border-radius: 18px;
@@ -603,7 +596,6 @@ p  { color: var(--muted); }
   box-shadow: 0 4px 18px -12px rgba(10, 37, 64, 0.08);
 }
 
-/* Chevron bullet — echoes the logo */
 .quote-list li::before {
   content: '';
   position: absolute;
@@ -683,6 +675,7 @@ p  { color: var(--muted); }
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 22px;
+  position: relative;
 }
 
 .tile {
@@ -700,6 +693,8 @@ p  { color: var(--muted); }
   isolation: isolate;
   display: flex;
   flex-direction: column;
+  transform-style: preserve-3d;
+  will-change: transform;
 
   opacity: 0;
   transform: translateY(36px) scale(0.98);
@@ -718,6 +713,7 @@ p  { color: var(--muted); }
 .tile[data-delay="3"].reveal.in { transition-delay: 0.24s; }
 .tile[data-delay="4"].reveal.in { transition-delay: 0.32s; }
 
+/* Chevron watermark on each tile */
 .tile::before {
   content: '';
   position: absolute;
@@ -732,8 +728,27 @@ p  { color: var(--muted); }
   opacity: 0.9;
 }
 
+/* Spotlight inside tile (radial glow that follows cursor) */
+.tile::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    260px circle at var(--glow-x, 50%) var(--glow-y, 50%),
+    rgba(0, 102, 255, 0.10),
+    transparent 55%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+.tile:hover::after {
+  opacity: 1;
+}
+
 .tile:hover {
-  transform: translateY(-6px);
   border-color: rgba(0, 102, 255, 0.35);
   box-shadow: 0 26px 50px -28px rgba(10, 37, 64, 0.28);
 }
@@ -764,6 +779,30 @@ p  { color: var(--muted); }
   opacity: 0.7;
 }
 
+/* ---------- Tile inner layers (3D depth on tilt) ---------- */
+.tile .tile-num,
+.tile .tile-icon,
+.tile h3,
+.tile .tile-list,
+.tile .tile-blurb,
+.tile .tile-cta {
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform: translateZ(0);
+}
+.tile.tilting .tile-num   { transform: translateZ(30px); }
+.tile.tilting .tile-icon  { transform: translateZ(22px); }
+.tile.tilting h3          { transform: translateZ(18px); }
+.tile.tilting .tile-blurb { transform: translateZ(12px); }
+.tile.tilting .tile-list  { transform: translateZ(10px); }
+.tile.tilting .tile-cta   { transform: translateZ(24px); }
+
+/* Smooth tilt transitions */
+.tile.tilting {
+  transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1),
+              border-color 0.35s ease,
+              box-shadow  0.35s ease;
+}
+
 .tile-num {
   position: relative;
   z-index: 1;
@@ -781,12 +820,12 @@ p  { color: var(--muted); }
   background: rgba(0, 102, 255, 0.08);
   border: 1px solid rgba(0, 102, 255, 0.15);
   margin-bottom: 20px;
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .tile:hover .tile-num {
   transform: translateY(-2px) rotate(-4deg);
 }
 
+/* ---------- Icon with micro-animations ---------- */
 .tile-icon {
   position: relative;
   z-index: 1;
@@ -794,12 +833,48 @@ p  { color: var(--muted); }
   height: 44px;
   color: var(--navy);
   margin-bottom: 16px;
-  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), color 0.3s ease;
 }
 .tile-icon svg { width: 100%; height: 100%; }
 .tile:hover .tile-icon {
-  transform: translateY(-2px) scale(1.06);
   color: var(--accent);
+}
+
+/* SVG stroke draw-in on hover */
+.tile-icon svg [stroke] {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  transition: stroke-dashoffset 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.tile:hover .tile-icon svg [stroke] {
+  stroke-dashoffset: 0;
+}
+
+/* Pop for solid fills */
+.tile-icon svg circle[fill]:not([fill="none"]) {
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: center;
+  transform-box: fill-box;
+}
+.tile:hover .tile-icon svg circle[fill]:not([fill="none"]) {
+  transform: scale(1.4);
+}
+
+/* Soft pulse ring behind icon */
+.tile-icon::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 102, 255, 0.18) 0%, transparent 65%);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+  z-index: -1;
+}
+.tile:hover .tile-icon::after {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .tile h3 {
@@ -885,6 +960,27 @@ p  { color: var(--muted); }
 .tile-cta a:hover { gap: 10px; }
 .tile-cta a:hover span { transform: translateX(2px); }
 
+/* Cursor spotlight across the grid */
+.tile-grid::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  inset: 0;
+  border-radius: 24px;
+  background: radial-gradient(
+    500px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(0, 102, 255, 0.10),
+    rgba(0, 102, 255, 0.04) 30%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 0;
+}
+.tile-grid:hover::after {
+  opacity: 1;
+}
+
 .services-outro {
   margin-top: 60px;
   text-align: center;
@@ -919,6 +1015,9 @@ p  { color: var(--muted); }
   margin: 0 auto 22px;
 }
 
+/* =========================================================
+   SERVICE TILES — Responsive
+   ========================================================= */
 @media (max-width: 900px) {
   .tile-grid { gap: 18px; }
   .tile { padding: 28px 26px 24px; }
@@ -942,6 +1041,21 @@ p  { color: var(--muted); }
   .tile-list li::before { width: 11px; height: 11px; }
   .services-outro { padding: 36px 22px; margin-top: 40px; }
   .services-outro p { font-size: 0.98rem; }
+}
+
+/* Disable tilt + icon animations on touch / reduced-motion */
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .tile.tilting { transform: none !important; }
+  .tile.tilting .tile-num,
+  .tile.tilting .tile-icon,
+  .tile.tilting h3,
+  .tile.tilting .tile-blurb,
+  .tile.tilting .tile-list,
+  .tile.tilting .tile-cta { transform: none !important; }
+
+  .tile:hover .tile-icon svg [stroke] { stroke-dashoffset: 200; }
+  .tile:hover .tile-icon svg circle[fill]:not([fill="none"]) { transform: none; }
+  .tile:hover .tile-icon::after { opacity: 0; }
 }
 
 /* =========================================================
@@ -1283,7 +1397,7 @@ body.modal-lock { overflow: hidden; }
   .modal-card { padding: 22px 16px 16px; }
   .field input,
   .field select,
-  .field textarea { font-size: 16px; }   /* prevents iOS zoom */
+  .field textarea { font-size: 16px; }
   .modal-close-x { width: 32px; height: 32px; top: 10px; right: 10px; }
   .modal-head h3 { font-size: 1.1rem; }
   .modal-head p  { font-size: 0.8rem; }
