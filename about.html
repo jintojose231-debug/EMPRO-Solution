@@ -1,332 +1,288 @@
-/* =========================================================
-   CONTACT MODAL — Bubble pop open/close
-   ========================================================= */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — EMPro Solutions</title>
+  <meta name="description" content="EMPro Solutions is a Wellington-based startup helping people and businesses make technology work for them. Meet your next-door techy." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/menu.css" />
+</head>
+<body>
 
-/* Prevent background scroll */
-body.modal-lock { overflow: hidden; }
+  <!-- ============ MENU ============ -->
+  <header class="site-header" id="siteHeader">
+    <div class="nav-wrap">
+      <a href="index.html" class="brand" aria-label="EMPro Solutions home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+            <path class="chev-1" d="M14 44 L40 18 L66 44" />
+            <path class="chev-2" d="M14 62 L40 36 L66 62" />
+            <circle class="brand-dot" cx="66" cy="18" r="5" />
+          </svg>
+        </span>
+        <span class="brand-text">
+          <span class="brand-name">EMPRO</span>
+          <span class="brand-sub">SOLUTION</span>
+        </span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-links" id="navLinks" aria-label="Primary">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="index.html#services" class="nav-link">Services</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+        <a href="#" class="nav-cta" data-open-contact>Start a Project</a>
+      </nav>
+    </div>
+  </header>
 
-/* ---------- Backdrop ---------- */
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 2000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
+  <!-- ============ PAGE HERO ============ -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">About Us</span>
+      <h1>A <span class="gradient-text">next-door techy</span><br />for real-world problems.</h1>
+    </div>
+  </section>
 
-  background: rgba(10, 37, 64, 0.28);
-  backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px);
+  <!-- ============ INTRO ============ -->
+  <section class="section section-tight">
+    <div class="container">
+      <div class="prose reveal">
+        <p>
+          <strong>EMPro Solutions</strong> is a Wellington-based startup helping people and businesses make technology work for them. We work with individuals, small businesses, community organisations and entrepreneurs who have an idea to develop—or a business challenge that needs a better solution.
+        </p>
+        <p>
+          You don't need to arrive with a finished idea, a technical plan or a list of software requirements. You might know exactly what you want to build, or you might simply know that a task is taking too much time, a process is difficult, or your business needs a tool that doesn't exist in the way you need it.
+        </p>
+        <p>
+          We listen, ask the right questions and help turn your idea or requirement into a practical digital solution.
+        </p>
+      </div>
+    </div>
+  </section>
 
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity 0.35s ease,
-    visibility 0s linear 0.5s,
-    backdrop-filter 0.4s ease;
-  will-change: opacity;
-}
-.modal-backdrop.is-open {
-  opacity: 1;
-  visibility: visible;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  transition:
-    opacity 0.3s ease,
-    visibility 0s,
-    backdrop-filter 0.4s ease;
-}
+  <!-- ============ OUR BELIEF ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-num">01</span>
+        <h2>Our Belief</h2>
+      </div>
 
-/* ---------- Card ---------- */
-.modal-card {
-  position: relative;
-  width: 100%;
-  max-width: 620px;
-  max-height: calc(100vh - 48px);
-  overflow-y: auto;
-  background: #ffffff;
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  padding: 44px 44px 36px;
-  box-shadow:
-    0 40px 80px -30px rgba(10, 37, 64, 0.35),
-    0 12px 30px -12px rgba(10, 37, 64, 0.15);
+      <div class="belief reveal">
+        <h2>AI Is Powerful.<br /><span class="gradient-text">The Human Touch Still Matters.</span></h2>
+        <p>
+          We're living in an exciting AI era. AI can help generate code, create prototypes, speed up development and open up possibilities that once felt out of reach. But generating software is only one part of building a solution that works in the real world.
+        </p>
+        <p>
+          Someone still needs to <strong>understand your business</strong>, <strong>identify the real problem</strong>, make sensible decisions, connect the right pieces, test how everything works together and keep the people using it in mind. AI can be a powerful assistant, but it doesn't automatically understand your customers, your day-to-day work or what success looks like for you.
+        </p>
+        <p>
+          At EMPro Solutions, we combine AI-assisted development with <strong>human judgement</strong>, <strong>practical IT experience</strong> and a <strong>problem-solving mindset</strong>. We use technology to support the work—not replace the conversations and thinking that make a solution useful.
+        </p>
+      </div>
+    </div>
+  </section>
 
-  /* BUBBLE OPEN */
-  transform: scale(0.72) translateY(20px);
-  opacity: 0;
-  filter: blur(6px);
-  transition:
-    transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
-    opacity   0.4s ease,
-    filter    0.4s ease;
-}
-.modal-backdrop.is-open .modal-card {
-  transform: scale(1) translateY(0);
-  opacity: 1;
-  filter: blur(0);
-}
+  <!-- ============ MEET YOUR NEXT-DOOR TECHY ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-num">02</span>
+        <h2>Meet Your Next-Door Techy</h2>
+      </div>
 
-/* Gentle shake on validation error */
-@keyframes cardShake {
-  0%, 100% { transform: translateX(0); }
-  20%      { transform: translateX(-6px); }
-  40%      { transform: translateX(6px); }
-  60%      { transform: translateX(-4px); }
-  80%      { transform: translateX(4px); }
-}
-.modal-card.shake { animation: cardShake 0.45s ease; }
+      <div class="prose reveal" style="margin-bottom: 40px;">
+        <p>
+          Technology can feel complicated. Websites, apps, databases, cloud services, payments, automations, security and AI tools can quickly become overwhelming—especially when you're busy running a business.
+        </p>
+        <p>
+          Think of us as your <strong>next-door techy</strong>: someone you can talk to in plain language, explain what you need, ask questions and explore options with. You don't have to know the technical terms or decide which platform to use before you get in touch.
+        </p>
+        <p>You can start with something as simple as:</p>
+      </div>
 
-/* Thin scrollbar */
-.modal-card::-webkit-scrollbar { width: 8px; }
-.modal-card::-webkit-scrollbar-thumb { background: #d3dae5; border-radius: 4px; }
-.modal-card::-webkit-scrollbar-thumb:hover { background: #b8c2d1; }
+      <ul class="quote-list reveal">
+        <li>"I have an idea for an app or website."</li>
+        <li>"My team repeats the same admin tasks every week."</li>
+        <li>"I need a better way to manage customers, members or bookings."</li>
+        <li>"My business needs a tool, but I'm not sure what it should look like."</li>
+        <li>"I already have a system, but I need to improve or connect it to something else."</li>
+      </ul>
 
-/* ---------- Close X ---------- */
-.modal-close-x {
-  position: absolute;
-  top: 16px; right: 16px;
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  background: #f4f8ff;
-  border: 1px solid var(--border);
-  color: var(--text-soft);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background 0.25s ease, transform 0.25s ease, color 0.25s ease;
-  z-index: 3;
-}
-.modal-close-x svg { width: 16px; height: 16px; }
-.modal-close-x:hover {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
-  transform: rotate(90deg);
-}
+      <p class="closing-line reveal">
+        We'll help you work through the problem and find a sensible next step.
+      </p>
+    </div>
+  </section>
 
-/* ---------- Floating bubbles (decoration) ---------- */
-.bubble {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  opacity: 0;
-  transform: scale(0.2);
-  transition:
-    opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
-    transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
-  background:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), transparent 55%),
-    linear-gradient(135deg, #0066ff, #7b61ff);
-  box-shadow: 0 12px 30px -10px rgba(0, 102, 255, 0.45);
-  z-index: 1;
-}
-.modal-backdrop.is-open .bubble {
-  opacity: 0.85;
-  transform: scale(1);
-}
-.bubble-1 { width: 46px; height: 46px; top: 8%;  left: 6%;  transition-delay: 0.15s; }
-.bubble-2 { width: 26px; height: 26px; top: 18%; right: 8%; transition-delay: 0.25s;
-            background: radial-gradient(circle at 30% 30%, #fff, transparent 55%),
-                        linear-gradient(135deg, #ffb800, #ff8a00); }
-.bubble-3 { width: 60px; height: 60px; bottom: 10%; left: 10%; transition-delay: 0.3s;
-            background: radial-gradient(circle at 30% 30%, #fff, transparent 55%),
-                        linear-gradient(135deg, #00c9a7, #0066ff); }
-.bubble-4 { width: 34px; height: 34px; bottom: 14%; right: 12%; transition-delay: 0.2s; }
-.bubble-5 { width: 18px; height: 18px; top: 46%; left: 3%; transition-delay: 0.35s;
-            background: radial-gradient(circle at 30% 30%, #fff, transparent 55%),
-                        linear-gradient(135deg, #0a2540, #33415a); }
+  <!-- ============ CTA ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-band reveal">
+        <h2>Let's build something useful.</h2>
+        <p>Whether it's a small fix or a bold idea, we'd love to hear about it.</p>
+        <button type="button" class="btn btn-primary" data-open-contact>Get in Touch →</button>
+      </div>
+    </div>
+  </section>
 
-/* Gentle idle float */
-@keyframes floatY {
-  0%, 100% { transform: translateY(0)    scale(1); }
-  50%      { transform: translateY(-10px) scale(1.03); }
-}
-.modal-backdrop.is-open .bubble-1 { animation: floatY 4.2s ease-in-out infinite; }
-.modal-backdrop.is-open .bubble-2 { animation: floatY 3.4s ease-in-out 0.4s infinite; }
-.modal-backdrop.is-open .bubble-3 { animation: floatY 5s   ease-in-out 0.2s infinite; }
-.modal-backdrop.is-open .bubble-4 { animation: floatY 3.8s ease-in-out 0.6s infinite; }
-.modal-backdrop.is-open .bubble-5 { animation: floatY 2.8s ease-in-out 0.9s infinite; }
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="footer-wrap">
+      <div class="footer-brand">
+        <span class="brand-name">EMPRO</span><span class="brand-sub">SOLUTION</span>
+        <p>Wellington-based. Human thinking. Smart technology. Practical solutions.</p>
+      </div>
+      <div class="footer-cols">
+        <div>
+          <h4>Company</h4>
+          <a href="about.html">About Us</a>
+          <a href="index.html#services">Services</a>
+          <a href="#" data-open-contact>Contact</a>
+        </div>
+        <div>
+          <h4>Connect</h4>
+          <a href="mailto:letstalk@emprosolution.co.nz">letstalk@emprosolution.co.nz</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">GitHub</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> EMPro Solutions. All rights reserved.</span>
+      <span>Made in Wellington, Aotearoa</span>
+    </div>
+  </footer>
 
-/* ---------- Head ---------- */
-.modal-head { text-align: center; margin-bottom: 28px; }
-.modal-mark {
-  width: 52px; height: 52px;
-  margin: 0 auto 14px;
-  display: flex; align-items: center; justify-content: center;
-}
-.modal-mark svg { width: 100%; height: 100%; }
-.modal-head h3 {
-  font-size: 1.5rem;
-  margin-bottom: 8px;
-  color: var(--navy);
-}
-.modal-head p {
-  font-size: 0.95rem;
-  color: var(--muted);
-  max-width: 420px;
-  margin: 0 auto;
-}
+  <!-- ============================================================
+       CONTACT POP-UP MODAL
+       ============================================================ -->
+  <div class="modal-backdrop" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactTitle" aria-hidden="true">
 
-/* ---------- Form ---------- */
-.contact-form { display: grid; gap: 18px; }
+    <!-- Floating chevron bubbles (decoration) -->
+    <span class="bubble bubble-1" aria-hidden="true"></span>
+    <span class="bubble bubble-2" aria-hidden="true"></span>
+    <span class="bubble bubble-3" aria-hidden="true"></span>
+    <span class="bubble bubble-4" aria-hidden="true"></span>
+    <span class="bubble bubble-5" aria-hidden="true"></span>
 
-.field-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
+    <div class="modal-card" id="modalCard">
 
-.field { display: flex; flex-direction: column; gap: 6px; }
+      <!-- Close X -->
+      <button class="modal-close-x" type="button" data-close-contact aria-label="Close contact form">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 6 L18 18 M18 6 L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
 
-.field label {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text);
-  letter-spacing: 0.01em;
-}
-.field .req { color: var(--accent); }
-.field .opt { color: var(--muted); font-weight: 400; }
+      <!-- ===== FORM VIEW ===== -->
+      <div class="modal-view modal-view-form" id="viewForm">
+        <div class="modal-head">
+          <div class="modal-mark" aria-hidden="true">
+            <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 34 L30 14 L50 34" fill="none" stroke="#0066ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M10 46 L30 26 L50 46" fill="none" stroke="#0a2540" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="50" cy="14" r="4" fill="#ffb800"/>
+            </svg>
+          </div>
+          <h3 id="contactTitle">Let's talk</h3>
+          <p>Tell us a little about you and what you'd like to build. We'll reply personally.</p>
+        </div>
 
-.field input,
-.field select,
-.field textarea {
-  font-family: inherit;
-  font-size: 15px;
-  color: var(--text);
-  background: #ffffff;
-  border: 1.5px solid var(--border);
-  border-radius: 12px;
-  padding: 12px 14px;
-  width: 100%;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-  outline: none;
-}
-.field input::placeholder,
-.field textarea::placeholder { color: #a4adbb; }
+        <form class="contact-form" id="contactForm" action="https://formsubmit.co/letstalk@emprosolution.co.nz" method="POST" novalidate>
 
-.field input:focus,
-.field select:focus,
-.field textarea:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 4px rgba(0, 102, 255, 0.12);
-}
+          <!-- FormSubmit config -->
+          <input type="hidden" name="_subject" value="New enquiry from EMPro Solutions website" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
 
-.field textarea { resize: vertical; min-height: 100px; line-height: 1.55; }
+          <div class="field-row">
+            <div class="field">
+              <label for="fullName">Full Name <span class="req">*</span></label>
+              <input type="text" id="fullName" name="Full Name" placeholder="Jane Doe" required autocomplete="name" />
+              <span class="field-error" data-error-for="fullName"></span>
+            </div>
+            <div class="field">
+              <label for="email">Email <span class="req">*</span></label>
+              <input type="email" id="email" name="Email" placeholder="jane@example.com" required autocomplete="email" />
+              <span class="field-error" data-error-for="email"></span>
+            </div>
+          </div>
 
-.field select {
-  appearance: none;
-  -webkit-appearance: none;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'><path d='M1 1 L6 6 L11 1' fill='none' stroke='%2364748b' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/></svg>");
-  background-repeat: no-repeat;
-  background-position: right 14px center;
-  background-size: 12px;
-  padding-right: 38px;
-  cursor: pointer;
-}
+          <div class="field">
+            <label for="organization">Organization <span class="opt">(if applicable)</span></label>
+            <input type="text" id="organization" name="Organization" placeholder="Your company or group" autocomplete="organization" />
+          </div>
 
-.field input.has-error,
-.field select.has-error,
-.field textarea.has-error {
-  border-color: #e04242;
-  box-shadow: 0 0 0 4px rgba(224, 66, 66, 0.1);
-}
-.field-error {
-  font-size: 12px;
-  color: #e04242;
-  min-height: 0;
-  transition: min-height 0.2s ease;
-}
-.field-error:not(:empty) { min-height: 16px; }
+          <div class="field">
+            <label for="reason">Reason for contacting us <span class="req">*</span></label>
+            <select id="reason" name="Reason" required>
+              <option value="" disabled selected>Choose one…</option>
+              <option>I have an idea for an app or website</option>
+              <option>I need a tool built for my business</option>
+              <option>I want to improve or connect an existing system</option>
+              <option>I need help with automation or AI</option>
+              <option>Something else</option>
+            </select>
+            <span class="field-error" data-error-for="reason"></span>
+          </div>
 
-/* ---------- Actions ---------- */
-.modal-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  margin-top: 6px;
-}
-.modal-actions .btn { padding: 12px 24px; }
+          <div class="field">
+            <label for="message">Message <span class="req">*</span></label>
+            <textarea id="message" name="Message" rows="4" placeholder="Tell us what you're thinking about…" required></textarea>
+            <span class="field-error" data-error-for="message"></span>
+          </div>
 
-/* Submit button loading spinner */
-.btn-spinner {
-  display: none;
-  width: 14px; height: 14px;
-  border: 2px solid rgba(255, 255, 255, 0.45);
-  border-top-color: #fff;
-  border-radius: 50%;
-  animation: spin 0.7s linear infinite;
-  margin-left: 4px;
-}
-.btn.is-loading .btn-spinner { display: inline-block; }
-.btn.is-loading .btn-label { opacity: 0.85; }
-@keyframes spin { to { transform: rotate(360deg); } }
+          <div class="modal-actions">
+            <button type="button" class="btn btn-ghost" data-close-contact>Cancel</button>
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+              <span class="btn-label">Send Message</span>
+              <span class="btn-spinner" aria-hidden="true"></span>
+            </button>
+          </div>
+        </form>
+      </div>
 
-/* ---------- Thank-you view ---------- */
-.modal-view-thanks { text-align: center; padding: 20px 0 10px; }
-.thanks-mark {
-  width: 90px; height: 90px;
-  margin: 0 auto 20px;
-  animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.thanks-mark svg { width: 100%; height: 100%; overflow: visible; }
-@keyframes popIn {
-  0%   { transform: scale(0.4); opacity: 0; }
-  100% { transform: scale(1);   opacity: 1; }
-}
-.modal-view-thanks h3 {
-  font-size: 1.6rem;
-  color: var(--navy);
-  margin-bottom: 12px;
-}
-.modal-view-thanks p {
-  color: var(--text-soft);
-  font-size: 1rem;
-  line-height: 1.7;
-  max-width: 400px;
-  margin: 0 auto 28px;
-}
-.modal-view-thanks p strong { color: var(--accent); font-weight: 600; }
+      <!-- ===== THANK YOU VIEW ===== -->
+      <div class="modal-view modal-view-thanks" id="viewThanks" hidden>
+        <div class="thanks-mark" aria-hidden="true">
+          <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="40" r="34" fill="none" stroke="#0066ff" stroke-width="3" opacity="0.25"/>
+            <circle cx="40" cy="40" r="26" fill="none" stroke="#0066ff" stroke-width="3" opacity="0.5"/>
+            <path d="M26 40 L36 50 L54 30" fill="none" stroke="#0066ff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="58" cy="22" r="5" fill="#ffb800"/>
+          </svg>
+        </div>
+        <h3>Thank you!</h3>
+        <p>
+          Your message has been sent to <strong>letstalk@emprosolution.co.nz</strong>.<br />
+          We'll be in touch with you shortly.
+        </p>
+        <button type="button" class="btn btn-primary" data-close-contact>Close</button>
+      </div>
 
-/* =========================================================
-   RESPONSIVE — desktop, laptop, tablet, iPad, mobile
-   ========================================================= */
+    </div>
+  </div>
 
-/* Tablets / small laptops */
-@media (max-width: 860px) {
-  .modal-backdrop { padding: 20px; }
-  .modal-card { padding: 40px 32px 32px; border-radius: 22px; }
-  .bubble-3 { width: 50px; height: 50px; bottom: 6%; left: 5%; }
-  .bubble-1 { width: 38px; height: 38px; }
-}
-
-/* iPad portrait & large phones */
-@media (max-width: 640px) {
-  .modal-backdrop { padding: 16px; align-items: flex-start; }
-  .modal-card {
-    padding: 36px 22px 26px;
-    border-radius: 20px;
-    max-height: calc(100vh - 32px);
-    margin-top: 8px;
-  }
-  .field-row { grid-template-columns: 1fr; gap: 14px; }
-  .modal-head h3 { font-size: 1.35rem; }
-  .modal-actions {
-    flex-direction: column-reverse;
-    gap: 10px;
-  }
-  .modal-actions .btn { width: 100%; justify-content: center; }
-  .bubble-1, .bubble-2, .bubble-4, .bubble-5 { display: none; }
-  .bubble-3 { width: 40px; height: 40px; opacity: 0.6; }
-  .thanks-mark { width: 74px; height: 74px; }
-  .modal-view-thanks h3 { font-size: 1.4rem; }
-}
-
-/* Small phones */
-@media (max-width: 400px) {
-  .modal-card { padding: 32px 18px 22px; }
-  .field input, .field select, .field textarea { font-size: 16px; } /* prevents iOS zoom */
-  .modal-close-x { width: 36px; height: 36px; top: 12px; right: 12px; }
-}
+  <script src="js/menu.js"></script>
+  <script src="js/contact.js"></script>
+  <script>
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
