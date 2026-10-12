@@ -13,7 +13,7 @@
 </head>
 <body>
 
-  <!-- ============ MENU (from includes/menu.html) ============ -->
+  <!-- ============ MENU ============ -->
   <header class="site-header" id="siteHeader">
     <div class="nav-wrap">
       <a href="index.html" class="brand" aria-label="EMPro Solutions home">
@@ -37,7 +37,7 @@
         <a href="about.html" class="nav-link">About Us</a>
         <a href="#services" class="nav-link">Services</a>
         <a href="#contact" class="nav-link">Contact</a>
-        <a href="#contact" class="nav-cta">Start a Project</a>
+        <a href="#" class="nav-cta" data-open-contact>Start a Project</a>
       </nav>
     </div>
   </header>
@@ -66,7 +66,7 @@
       <p class="tagline">Human thinking. Smart technology. Practical solutions.</p>
 
       <div class="hero-cta">
-        <a href="#contact" class="btn btn-primary">Start a Project →</a>
+        <button type="button" class="btn btn-primary" data-open-contact>Start a Project →</button>
         <a href="about.html" class="btn btn-ghost">Learn About Us</a>
       </div>
     </div>
@@ -74,34 +74,164 @@
     <div class="scroll-hint">▼ &nbsp; SCROLL &nbsp; ▼</div>
   </section>
 
-  <!-- ============ INTRO STRIP ============ -->
-  <section class="section section-tight" id="services">
+  <!-- ============================================================
+       WHAT CAN WE DO FOR YOU — Interactive Service Tiles
+       ============================================================ -->
+  <section class="section services-section" id="services">
     <div class="container">
-      <div class="section-head">
-        <span class="section-num">01</span>
-        <h2>What We Do</h2>
-      </div>
-      <p class="reveal" style="max-width: 720px; font-size: 1.08rem; margin-bottom: 40px;">
-        We help individuals, small businesses, community organisations and entrepreneurs turn ideas and everyday challenges into practical digital solutions.
-      </p>
 
-      <div class="card-grid">
-        <div class="service reveal">
-          <div class="num">01 / DISCOVER</div>
-          <h3>Listen & Understand</h3>
-          <p>We start with your problem, not our tech stack. Tell us what's slowing you down — we'll help find the right path forward.</p>
-        </div>
-        <div class="service reveal">
-          <div class="num">02 / BUILD</div>
-          <h3>Design & Develop</h3>
-          <p>AI-assisted development combined with human judgement to build something that actually fits how you work.</p>
-        </div>
-        <div class="service reveal">
-          <div class="num">03 / SUPPORT</div>
-          <h3>Launch & Improve</h3>
-          <p>We test, iterate and stay with you — because a tool is only useful when it's still working six months later.</p>
-        </div>
+      <div class="services-intro reveal">
+        <span class="section-num">01</span>
+        <h2>What Can We <span class="gradient-text">Do for You?</span></h2>
+        <p class="lead">
+          We're not only here to build new ideas. If your business has a requirement,
+          a process to improve or a technology problem to solve, let's talk. The right
+          answer might be a new application—or it might be a simpler,
+          more cost-effective solution.
+        </p>
       </div>
+
+      <div class="tile-grid">
+
+        <!-- 01 — Websites & Online Presence -->
+        <article class="tile reveal" data-delay="0">
+          <div class="tile-num">01</div>
+          <div class="tile-icon" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="5" y="9" width="30" height="22" rx="3"/>
+              <path d="M5 15 H35"/>
+              <circle cx="9.5" cy="12" r="0.8" fill="currentColor"/>
+              <circle cx="13.5" cy="12" r="0.8" fill="currentColor"/>
+              <circle cx="17.5" cy="12" r="0.8" fill="currentColor"/>
+              <path d="M13 24 H27 M13 28 H22"/>
+            </svg>
+          </div>
+          <h3>Websites &amp; Online Presence</h3>
+          <ul class="tile-list">
+            <li>Business and startup websites</li>
+            <li>Landing pages and service websites</li>
+            <li>Websites for events and community organisations</li>
+            <li>Information portals and customer-facing pages</li>
+            <li>Forms and websites connected to email, databases or other services</li>
+          </ul>
+          <div class="tile-cta">
+            <a href="#" data-open-contact>Discuss this <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+
+        <!-- 02 — Custom Software & Web Applications (featured) -->
+        <article class="tile tile-featured reveal" data-delay="1">
+          <div class="tile-num">02</div>
+          <div class="tile-icon" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 11 L6 20 L15 29"/>
+              <path d="M25 11 L34 20 L25 29"/>
+              <path d="M23 7 L17 33"/>
+            </svg>
+          </div>
+          <h3>Custom Software &amp; Web Applications</h3>
+          <ul class="tile-list">
+            <li>Customer, member and staff portals</li>
+            <li>Registration, booking and appointment systems</li>
+            <li>Dashboards and management tools</li>
+            <li>Membership, check-in and tracking systems</li>
+            <li>Internal tools designed around your business workflow</li>
+            <li>Small custom applications through to larger product concepts</li>
+          </ul>
+          <div class="tile-cta">
+            <a href="#" data-open-contact>Discuss this <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+
+        <!-- 03 — Business Process Improvement & Automation -->
+        <article class="tile reveal" data-delay="2">
+          <div class="tile-num">03</div>
+          <div class="tile-icon" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="10" cy="10" r="4"/>
+              <circle cx="30" cy="30" r="4"/>
+              <path d="M13.5 12.5 L26.5 27.5"/>
+              <path d="M14 10 H26 a4 4 0 0 1 4 4 V26"/>
+              <path d="M26 30 H14 a4 4 0 0 1-4-4 V14"/>
+            </svg>
+          </div>
+          <h3>Business Process Improvement &amp; Automation</h3>
+          <ul class="tile-list">
+            <li>Reducing repetitive data entry and manual admin</li>
+            <li>Connecting online forms, spreadsheets and email notifications</li>
+            <li>Automated confirmations and customer communications</li>
+            <li>Data processing, reports and workflow improvements</li>
+            <li>QR-code-based registration, check-in and information access</li>
+          </ul>
+          <div class="tile-cta">
+            <a href="#" data-open-contact>Discuss this <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+
+        <!-- 04 — AI-Assisted Solutions & Prototypes -->
+        <article class="tile reveal" data-delay="3">
+          <div class="tile-num">04</div>
+          <div class="tile-icon" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6 L23 16 L33 20 L23 24 L20 34 L17 24 L7 20 L17 16 Z"/>
+              <circle cx="30" cy="10" r="2"/>
+              <circle cx="33" cy="30" r="1.5"/>
+            </svg>
+          </div>
+          <h3>AI-Assisted Solutions &amp; Prototypes</h3>
+          <ul class="tile-list">
+            <li>Exploring where AI could help your business</li>
+            <li>AI-assisted workflows and productivity tools</li>
+            <li>Proof-of-concept ideas and early prototypes</li>
+            <li>Using AI tools to support development where appropriate</li>
+            <li>Helping turn an early concept into a clearer, testable solution</li>
+          </ul>
+          <div class="tile-cta">
+            <a href="#" data-open-contact>Discuss this <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+
+        <!-- 05 — IT & Desktop Technology Support (wide) -->
+        <article class="tile tile-wide reveal" data-delay="4">
+          <div class="tile-num">05</div>
+          <div class="tile-icon" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="6" y="8" width="28" height="18" rx="2"/>
+              <path d="M14 34 H26"/>
+              <path d="M18 26 V34 M22 26 V34"/>
+              <path d="M12 13 H20 M12 17 H24 M12 21 H18"/>
+            </svg>
+          </div>
+          <h3>IT &amp; Desktop Technology Support</h3>
+          <p class="tile-blurb">
+            Our practical IT background helps us understand the everyday technology
+            issues people and organisations face. Depending on the need, we can also
+            assist with desktop and workplace technology.
+          </p>
+          <ul class="tile-list tile-list-cols">
+            <li>Windows PCs and laptops, setup and troubleshooting</li>
+            <li>Microsoft 365 and workplace applications</li>
+            <li>User and device management, including Entra ID, Active Directory and Intune</li>
+            <li>Printers, scanners, mobile devices and video-conferencing systems</li>
+            <li>Basic network troubleshooting and remote support</li>
+          </ul>
+          <div class="tile-cta">
+            <a href="#" data-open-contact>Discuss this <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="services-outro reveal">
+        <p>
+          Not sure which of these fits your situation? That's exactly what a
+          conversation is for.
+        </p>
+        <button type="button" class="btn btn-primary" data-open-contact>
+          Get in Touch →
+        </button>
+      </div>
+
     </div>
   </section>
 
@@ -111,12 +241,12 @@
       <div class="cta-band reveal">
         <h2>Have an idea — or a problem?</h2>
         <p>You don't need a finished plan or a list of requirements. Let's start with a conversation.</p>
-        <a href="mailto:hello@emprosolutions.nz" class="btn btn-primary">Get in Touch →</a>
+        <button type="button" class="btn btn-primary" data-open-contact>Get in Touch →</button>
       </div>
     </div>
   </section>
 
-  <!-- ============ FOOTER (from includes/footer.html) ============ -->
+  <!-- ============ FOOTER ============ -->
   <footer class="site-footer">
     <div class="footer-wrap">
       <div class="footer-brand">
@@ -128,11 +258,11 @@
           <h4>Company</h4>
           <a href="about.html">About Us</a>
           <a href="#services">Services</a>
-          <a href="#contact">Contact</a>
+          <a href="#" data-open-contact>Contact</a>
         </div>
         <div>
           <h4>Connect</h4>
-          <a href="mailto:hello@emprosolutions.nz">hello@emprosolutions.nz</a>
+          <a href="mailto:letstalk@emprosolution.co.nz">letstalk@emprosolution.co.nz</a>
           <a href="#">LinkedIn</a>
           <a href="#">GitHub</a>
         </div>
@@ -144,7 +274,117 @@
     </div>
   </footer>
 
+  <!-- ============================================================
+       CONTACT POP-UP MODAL
+       ============================================================ -->
+  <div class="modal-backdrop" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactTitle" aria-hidden="true">
+
+    <span class="bubble bubble-1" aria-hidden="true"></span>
+    <span class="bubble bubble-2" aria-hidden="true"></span>
+    <span class="bubble bubble-3" aria-hidden="true"></span>
+    <span class="bubble bubble-4" aria-hidden="true"></span>
+    <span class="bubble bubble-5" aria-hidden="true"></span>
+
+    <div class="modal-card" id="modalCard">
+
+      <button class="modal-close-x" type="button" data-close-contact aria-label="Close contact form">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 6 L18 18 M18 6 L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <!-- ===== FORM VIEW ===== -->
+      <div class="modal-view modal-view-form" id="viewForm">
+        <div class="modal-head">
+          <div class="modal-mark" aria-hidden="true">
+            <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 34 L30 14 L50 34" fill="none" stroke="#0066ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M10 46 L30 26 L50 46" fill="none" stroke="#0a2540" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="50" cy="14" r="4" fill="#ffb800"/>
+            </svg>
+          </div>
+          <h3 id="contactTitle">Let's talk</h3>
+          <p>Tell us a little about you and what you'd like to build. We'll reply personally.</p>
+        </div>
+
+        <form class="contact-form" id="contactForm" action="https://formsubmit.co/letstalk@emprosolution.co.nz" method="POST" novalidate>
+
+          <input type="hidden" name="_subject" value="New enquiry from EMPro Solutions website" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+
+          <div class="field-row">
+            <div class="field">
+              <label for="fullName">Full Name <span class="req">*</span></label>
+              <input type="text" id="fullName" name="Full Name" placeholder="Jane Doe" required autocomplete="name" />
+              <span class="field-error" data-error-for="fullName"></span>
+            </div>
+            <div class="field">
+              <label for="email">Email <span class="req">*</span></label>
+              <input type="email" id="email" name="Email" placeholder="jane@example.com" required autocomplete="email" />
+              <span class="field-error" data-error-for="email"></span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="organization">Organization <span class="opt">(if applicable)</span></label>
+            <input type="text" id="organization" name="Organization" placeholder="Your company or group" autocomplete="organization" />
+          </div>
+
+          <div class="field">
+            <label for="reason">Reason for contacting us <span class="req">*</span></label>
+            <select id="reason" name="Reason" required>
+              <option value="" disabled selected>Choose one…</option>
+              <option>I have an idea for an app or website</option>
+              <option>I need a tool built for my business</option>
+              <option>I want to improve or connect an existing system</option>
+              <option>I need help with automation or AI</option>
+              <option>Desktop Administration</option>
+              <option>Something else</option>
+            </select>
+            <span class="field-error" data-error-for="reason"></span>
+          </div>
+
+          <div class="field">
+            <label for="message">Message <span class="req">*</span></label>
+            <textarea id="message" name="Message" rows="4" placeholder="Tell us what you're thinking about…" required></textarea>
+            <span class="field-error" data-error-for="message"></span>
+          </div>
+
+          <div class="modal-actions">
+            <button type="button" class="btn btn-ghost" data-close-contact>Cancel</button>
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+              <span class="btn-label">Send Message</span>
+              <span class="btn-spinner" aria-hidden="true"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- ===== THANK YOU VIEW ===== -->
+      <div class="modal-view modal-view-thanks" id="viewThanks" hidden>
+        <div class="thanks-mark" aria-hidden="true">
+          <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="40" r="34" fill="none" stroke="#0066ff" stroke-width="3" opacity="0.25"/>
+            <circle cx="40" cy="40" r="26" fill="none" stroke="#0066ff" stroke-width="3" opacity="0.5"/>
+            <path d="M26 40 L36 50 L54 30" fill="none" stroke="#0066ff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="58" cy="22" r="5" fill="#ffb800"/>
+          </svg>
+        </div>
+        <h3>Thank you!</h3>
+        <p>
+          Your message has been sent to <strong>letstalk@emprosolution.co.nz</strong>.<br />
+          We'll be in touch with you shortly.
+        </p>
+        <button type="button" class="btn btn-primary" data-close-contact>Close</button>
+      </div>
+
+    </div>
+  </div>
+
   <script src="js/menu.js"></script>
+  <script src="js/contact.js"></script>
   <script>
     // ============ Reveal on scroll ============
     const io = new IntersectionObserver((entries) => {
@@ -156,11 +396,13 @@
 
     // ============ Hero parallax ============
     const heroContent = document.getElementById('heroContent');
-    document.addEventListener('mousemove', (e) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 14;
-      const y = (e.clientY / window.innerHeight - 0.5) * 14;
-      heroContent.style.transform = `translate(${x}px, ${y}px)`;
-    });
+    if (heroContent) {
+      document.addEventListener('mousemove', (e) => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 14;
+        const y = (e.clientY / window.innerHeight - 0.5) * 14;
+        heroContent.style.transform = `translate(${x}px, ${y}px)`;
+      });
+    }
 
     // ============ Footer year ============
     document.getElementById('year').textContent = new Date().getFullYear();
