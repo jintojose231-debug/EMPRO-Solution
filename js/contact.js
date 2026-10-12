@@ -4,14 +4,25 @@
    - Client-side validation
    - Submits to letstalk@emprosolution.co.nz via FormSubmit
    - Shows thank-you view on success
+   - Safe-guarded: no-op if modal is not present on the page
    ========================================================= */
 (function () {
-  const modal    = document.getElementById('contactModal');
-  const card     = document.getElementById('modalCard');
-  const formView = document.getElementById('viewForm');
-  const thankView= document.getElementById('viewThanks');
-  const form     = document.getElementById('contactForm');
-  const submitBtn= document.getElementById('submitBtn');
+  'use strict';
+
+  /* ---------- ELEMENT LOOKUP ---------- */
+  const modal     = document.getElementById('contactModal');
+  const card      = document.getElementById('modalCard');
+  const formView  = document.getElementById('viewForm');
+  const thankView = document.getElementById('viewThanks');
+  const form      = document.getElementById('contactForm');
+  const submitBtn = document.getElementById('submitBtn');
+
+  /* ---------- SAFE GUARD ----------
+     If the modal is not on this page, silently exit.
+     Prevents JS errors on pages that don't use the contact modal. */
+  if (!modal || !card || !formView || !thankView || !form || !submitBtn) {
+    return;
+  }
 
   let lastFocused = null;
   let isOpen = false;
@@ -23,7 +34,7 @@
     lastFocused = document.activeElement;
 
     // Reset views
-    formView.hidden = false;
+    formView.hidden  = false;
     thankView.hidden = true;
     form.reset();
     clearErrors();
@@ -34,7 +45,7 @@
     modal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('modal-lock');
 
-    // Focus first field after animation
+    // Focus first field after the bubble animation has mostly settled
     setTimeout(() => {
       const first = form.querySelector('input, select, textarea');
       if (first) first.focus();
@@ -49,7 +60,7 @@
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
 
-    // Wait for bubble-out animation to finish before unlocking scroll
+    // Wait for the bubble-out animation, then unlock scroll + restore focus
     setTimeout(() => {
       document.body.classList.remove('modal-lock');
       if (lastFocused && typeof lastFocused.focus === 'function') {
@@ -70,7 +81,7 @@
     el.addEventListener('click', closeModal);
   });
 
-  // Click on backdrop (outside card) closes
+  // Click on the backdrop (outside the card) closes the modal
   modal.addEventListener('click', (e) => {
     if (e.target === modal) closeModal();
   });
@@ -80,7 +91,7 @@
     if (e.key === 'Escape' && isOpen) closeModal();
   });
 
-  // Focus trap
+  /* ---------- FOCUS TRAP ---------- */
   modal.addEventListener('keydown', (e) => {
     if (e.key !== 'Tab' || !isOpen) return;
     const focusables = card.querySelectorAll(
@@ -110,42 +121,43 @@
     if (err)   err.textContent = '';
   }
   function clearErrors() {
-    ['fullName','email','reason','message'].forEach(clearError);
+    ['fullName', 'email', 'reason', 'message'].forEach(clearError);
   }
 
   function validate() {
     clearErrors();
     let ok = true;
 
-    const name  = form.fullName.value.trim();
-    const email = form.email.value.trim();
-    const reason= form.reason.value;
-    const msg   = form.message.value.trim();
+    const name    = form.fullName.value.trim();
+    const email   = form.email.value.trim();
+    const reason  = form.reason.value;
+    const msg     = form.message.value.trim();
     const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (name.length < 2) { setError('fullName', 'Please enter your name.'); ok = false; }
-    if (!emailRe.test(email)) { setError('email', 'Please enter a valid email.'); ok = false; }
-    if (!reason) { setError('reason', 'Please choose a reason.'); ok = false; }
-    if (msg.length < 10) { setError('message', 'Please tell us a bit more (min 10 characters).'); ok = false; }
+    if (name.length < 2)      { setError('fullName', 'Please enter your name.');                    ok = false; }
+    if (!emailRe.test(email)) { setError('email',    'Please enter a valid email.');                ok = false; }
+    if (!reason)              { setError('reason',   'Please choose a reason.');                    ok = false; }
+    if (msg.length < 10)      { setError('message',  'Please tell us a bit more (min 10 characters).'); ok = false; }
 
     return ok;
   }
 
-  // Live-clear on input
-  ['fullName','email','reason','message'].forEach(id => {
+  // Live-clear errors as the user types / selects
+  ['fullName', 'email', 'reason', 'message'].forEach(id => {
     const el = document.getElementById(id);
     if (!el) return;
-    el.addEventListener('input', () => clearError(id));
+    el.addEventListener('input',  () => clearError(id));
     el.addEventListener('change', () => clearError(id));
   });
 
   /* ---------- SUBMIT ---------- */
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+
     if (!validate()) {
-      // Shake the card gently
+      // Gentle shake on the card
       card.classList.remove('shake');
-      void card.offsetWidth;
+      void card.offsetWidth;       // force reflow
       card.classList.add('shake');
       return;
     }
@@ -163,7 +175,7 @@
 
       if (res.ok || res.type === 'opaque') {
         // Success → show thank-you view
-        formView.hidden = true;
+        formView.hidden  = true;
         thankView.hidden = false;
       } else {
         throw new Error('Send failed');
@@ -181,7 +193,7 @@
       window.location.href = `mailto:letstalk@emprosolution.co.nz?subject=${subject}&body=${body}`;
 
       // Still show thank-you so the user gets feedback
-      formView.hidden = true;
+      formView.hidden  = true;
       thankView.hidden = false;
     } finally {
       submitBtn.classList.remove('is-loading');
