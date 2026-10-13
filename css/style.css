@@ -1439,3 +1439,402 @@ body.modal-lock { overflow: hidden; }
   .tile.reveal { opacity: 1; transform: none; }
   .reveal       { opacity: 1; transform: none; }
 }
+
+/* =========================================================
+   WHY CHOOSE EMPRO — Tree/Branch Reveal Section
+   ========================================================= */
+
+.why-section {
+  position: relative;
+  padding: 100px 0;
+  overflow: visible;
+}
+
+.why-section .section-head {
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.why-intro {
+  max-width: 640px;
+  margin: 0 auto 72px;
+  text-align: center;
+}
+
+.why-intro h2 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.why-intro p {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text-soft);
+}
+
+/* --- Tree container --- */
+.tree-container {
+  position: relative;
+  max-width: 860px;
+  margin: 0 auto;
+  padding-left: 72px;
+}
+
+/* Vertical trunk line */
+.tree-trunk {
+  position: absolute;
+  left: 28px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 102, 255, 0) 0%,
+    rgba(0, 102, 255, 0.15) 8%,
+    rgba(0, 102, 255, 0.25) 50%,
+    rgba(0, 102, 255, 0.15) 92%,
+    rgba(0, 102, 255, 0) 100%
+  );
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.tree-trunk::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 0;
+  background: linear-gradient(180deg, #0066ff, #00c9a7);
+  border-radius: 2px;
+  transition: height 2.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.tree-container.in .tree-trunk::after {
+  height: 100%;
+}
+
+/* --- Individual branch nodes --- */
+.tree-branch {
+  position: relative;
+  margin-bottom: 48px;
+  padding-left: 44px;
+
+  opacity: 0;
+  transform: translateX(-20px);
+  transition:
+    opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.tree-branch:last-child {
+  margin-bottom: 0;
+}
+
+.tree-container.in .tree-branch {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Staggered delays for branch appearance */
+.tree-container.in .tree-branch:nth-child(1) { transition-delay: 0.3s; }
+.tree-container.in .tree-branch:nth-child(2) { transition-delay: 0.7s; }
+.tree-container.in .tree-branch:nth-child(3) { transition-delay: 1.1s; }
+.tree-container.in .tree-branch:nth-child(4) { transition-delay: 1.5s; }
+.tree-container.in .tree-branch:nth-child(5) { transition-delay: 1.9s; }
+.tree-container.in .tree-branch:nth-child(6) { transition-delay: 2.3s; }
+
+/* --- Branch connector line (horizontal) --- */
+.tree-branch::before {
+  content: '';
+  position: absolute;
+  left: 16px;
+  top: 30px;
+  width: 28px;
+  height: 2px;
+  background: linear-gradient(90deg, #0066ff, rgba(0, 102, 255, 0.3));
+  border-radius: 2px;
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.tree-container.in .tree-branch:nth-child(1)::before { transition-delay: 0.5s; }
+.tree-container.in .tree-branch:nth-child(2)::before { transition-delay: 0.9s; }
+.tree-container.in .tree-branch:nth-child(3)::before { transition-delay: 1.3s; }
+.tree-container.in .tree-branch:nth-child(4)::before { transition-delay: 1.7s; }
+.tree-container.in .tree-branch:nth-child(5)::before { transition-delay: 2.1s; }
+.tree-container.in .tree-branch:nth-child(6)::before { transition-delay: 2.5s; }
+
+.tree-container.in .tree-branch::before {
+  transform: scaleX(1);
+}
+
+/* --- Branch node dot --- */
+.tree-branch .branch-dot {
+  position: absolute;
+  left: 26px;
+  top: 24px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0066ff, #00c9a7);
+  border: 2px solid #ffffff;
+  box-shadow:
+    0 0 0 2px rgba(0, 102, 255, 0.2),
+    0 0 16px -2px rgba(0, 102, 255, 0.4);
+  transform: scale(0);
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 2;
+}
+
+.tree-container.in .tree-branch:nth-child(1) .branch-dot { transition-delay: 0.5s; }
+.tree-container.in .tree-branch:nth-child(2) .branch-dot { transition-delay: 0.9s; }
+.tree-container.in .tree-branch:nth-child(3) .branch-dot { transition-delay: 1.3s; }
+.tree-container.in .tree-branch:nth-child(4) .branch-dot { transition-delay: 1.7s; }
+.tree-container.in .tree-branch:nth-child(5) .branch-dot { transition-delay: 2.1s; }
+.tree-container.in .tree-branch:nth-child(6) .branch-dot { transition-delay: 2.5s; }
+
+.tree-container.in .tree-branch .branch-dot {
+  transform: scale(1);
+}
+
+/* Pulse ring animation on the dot */
+.tree-branch .branch-dot::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 102, 255, 0.35);
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.tree-branch:hover .branch-dot::after {
+  opacity: 1;
+  transform: scale(1.3);
+}
+
+/* --- Branch card content --- */
+.branch-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 26px 28px;
+  box-shadow: 0 4px 18px -12px rgba(10, 37, 64, 0.08);
+  transition:
+    transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.branch-card::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 120px;
+  height: 120px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><g fill='none' stroke='%230066ff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' opacity='0.08'><path d='M20 58 L50 28 L80 58'/><path d='M20 78 L50 48 L80 78'/></g><circle cx='80' cy='28' r='5' fill='%23ffb800' opacity='0.35'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  opacity: 0.7;
+}
+
+.branch-card:hover {
+  transform: translateX(6px);
+  border-color: rgba(0, 102, 255, 0.35);
+  box-shadow: 0 16px 40px -20px rgba(0, 102, 255, 0.25);
+}
+
+.branch-card:hover::before {
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+.branch-card h3 {
+  position: relative;
+  font-size: 1.15rem;
+  color: var(--navy);
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.branch-card p {
+  position: relative;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-soft);
+  margin: 0;
+}
+
+/* --- Leaf accent on each branch --- */
+.tree-branch .branch-leaf {
+  position: absolute;
+  left: 34px;
+  top: 28px;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 8px solid rgba(0, 201, 167, 0.35);
+  transform: rotate(35deg) scale(0);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 3;
+}
+
+.tree-container.in .tree-branch:nth-child(1) .branch-leaf { transition-delay: 0.6s; }
+.tree-container.in .tree-branch:nth-child(2) .branch-leaf { transition-delay: 1.0s; }
+.tree-container.in .tree-branch:nth-child(3) .branch-leaf { transition-delay: 1.4s; }
+.tree-container.in .tree-branch:nth-child(4) .branch-leaf { transition-delay: 1.8s; }
+.tree-container.in .tree-branch:nth-child(5) .branch-leaf { transition-delay: 2.2s; }
+.tree-container.in .tree-branch:nth-child(6) .branch-leaf { transition-delay: 2.6s; }
+
+.tree-container.in .tree-branch .branch-leaf {
+  transform: rotate(35deg) scale(1);
+}
+
+/* =========================================================
+   WHY CHOOSE — Responsive
+   ========================================================= */
+
+@media (max-width: 720px) {
+  .tree-container {
+    padding-left: 56px;
+  }
+
+  .tree-trunk {
+    left: 20px;
+  }
+
+  .tree-branch {
+    padding-left: 36px;
+    margin-bottom: 36px;
+  }
+
+  .tree-branch::before {
+    left: 10px;
+    width: 22px;
+    top: 26px;
+  }
+
+  .tree-branch .branch-dot {
+    left: 18px;
+    top: 20px;
+    width: 10px;
+    height: 10px;
+  }
+
+  .tree-branch .branch-leaf {
+    left: 26px;
+    top: 24px;
+  }
+
+  .branch-card {
+    padding: 22px 22px;
+    border-radius: 14px;
+  }
+
+  .branch-card h3 {
+    font-size: 1.05rem;
+  }
+
+  .branch-card p {
+    font-size: 0.9rem;
+  }
+
+  .why-intro {
+    margin-bottom: 52px;
+  }
+}
+
+@media (max-width: 480px) {
+  .why-section {
+    padding: 60px 0;
+  }
+
+  .tree-container {
+    padding-left: 44px;
+  }
+
+  .tree-trunk {
+    left: 14px;
+  }
+
+  .tree-branch {
+    padding-left: 28px;
+    margin-bottom: 28px;
+  }
+
+  .tree-branch::before {
+    left: 6px;
+    width: 18px;
+    top: 24px;
+  }
+
+  .tree-branch .branch-dot {
+    left: 12px;
+    top: 18px;
+    width: 10px;
+    height: 10px;
+  }
+
+  .tree-branch .branch-leaf {
+    left: 20px;
+    top: 22px;
+  }
+
+  .branch-card {
+    padding: 20px 18px;
+  }
+
+  .branch-card h3 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  .branch-card p {
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+
+  .why-intro h2 {
+    font-size: 1.5rem;
+  }
+
+  .why-intro p {
+    font-size: 0.95rem;
+  }
+}
+
+/* Reduced motion — show everything instantly */
+@media (prefers-reduced-motion: reduce) {
+  .tree-container .tree-branch,
+  .tree-container .tree-branch::before,
+  .tree-container .tree-branch .branch-dot,
+  .tree-container .tree-branch .branch-leaf,
+  .tree-container.in .tree-branch,
+  .tree-container.in .tree-branch::before,
+  .tree-container.in .tree-branch .branch-dot,
+  .tree-container.in .tree-branch .branch-leaf {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .tree-container .tree-trunk::after {
+    height: 100% !important;
+    transition: none !important;
+  }
+}
