@@ -232,6 +232,81 @@
         </button>
       </div>
 
+      <!-- ============================================================
+           WHY CHOOSE EMPRO — Tree / Branch Reveal
+           ============================================================ -->
+      <section class="why-section">
+        <div class="why-intro reveal">
+          <span class="section-num">02</span>
+          <h2>Why Choose <span class="gradient-text">EMPro Solutions?</span></h2>
+        </div>
+
+        <div class="tree-container" id="whyTree">
+          <div class="tree-trunk" aria-hidden="true"></div>
+
+          <!-- Branch 1 -->
+          <div class="tree-branch">
+            <span class="branch-dot" aria-hidden="true"></span>
+            <span class="branch-leaf" aria-hidden="true"></span>
+            <div class="branch-card">
+              <h3>A Person You Can Talk To</h3>
+              <p>We aim to make technology conversations straightforward. Explain what you need in your own words—we’ll help translate it into practical options.</p>
+            </div>
+          </div>
+
+          <!-- Branch 2 -->
+          <div class="tree-branch">
+            <span class="branch-dot" aria-hidden="true"></span>
+            <span class="branch-leaf" aria-hidden="true"></span>
+            <div class="branch-card">
+              <h3>We Start With Your Requirement</h3>
+              <p>You don’t need to have a software idea. We can start with the business outcome you want, the problem you’re facing or the process you want to improve.</p>
+            </div>
+          </div>
+
+          <!-- Branch 3 -->
+          <div class="tree-branch">
+            <span class="branch-dot" aria-hidden="true"></span>
+            <span class="branch-leaf" aria-hidden="true"></span>
+            <div class="branch-card">
+              <h3>Practical, Not Complicated</h3>
+              <p>We don’t believe every problem needs a large or expensive application. Sometimes a well-designed form, automation, dashboard or existing platform may be the better fit.</p>
+            </div>
+          </div>
+
+          <!-- Branch 4 -->
+          <div class="tree-branch">
+            <span class="branch-dot" aria-hidden="true"></span>
+            <span class="branch-leaf" aria-hidden="true"></span>
+            <div class="branch-card">
+              <h3>AI With Human Judgement</h3>
+              <p>We embrace AI where it adds value, while keeping people, usability, testing and real-world needs at the centre of the work.</p>
+            </div>
+          </div>
+
+          <!-- Branch 5 -->
+          <div class="tree-branch">
+            <span class="branch-dot" aria-hidden="true"></span>
+            <span class="branch-leaf" aria-hidden="true"></span>
+            <div class="branch-card">
+              <h3>Technology That Fits the Way You Work</h3>
+              <p>We consider how people will actually use a solution—not just how it looks in a demo. The goal is to make technology useful in everyday work.</p>
+            </div>
+          </div>
+
+          <!-- Branch 6 -->
+          <div class="tree-branch">
+            <span class="branch-dot" aria-hidden="true"></span>
+            <span class="branch-leaf" aria-hidden="true"></span>
+            <div class="branch-card">
+              <h3>A Relationship That Can Grow</h3>
+              <p>Your needs may change as your business grows. We aim to help you take a sensible first step, with room to improve or expand the solution over time.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
     </div>
   </section>
 
@@ -275,8 +350,7 @@
   </footer>
 
   <!-- ============================================================
-       CONTACT POP-UP MODAL
-       ============================================================ -->
+       CONTACT POP-UP MODAL       ============================================================ -->
   <div class="modal-backdrop" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactTitle" aria-hidden="true">
 
     <span class="bubble bubble-1" aria-hidden="true"></span>
@@ -407,6 +481,20 @@
 
     // ============ Footer year ============
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ============ Tree container reveal ============
+    const treeContainer = document.getElementById('whyTree');
+    if (treeContainer) {
+      const treeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('in');
+            treeObserver.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      treeObserver.observe(treeContainer);
+    }
   </script>
 </body>
 </html>
