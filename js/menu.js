@@ -1,5 +1,3 @@
-[file name]: menu.js
-[file content begin]
 /* =========================================================
    EMPro Solutions — Navigation behaviour
    ========================================================= */
@@ -42,4 +40,3 @@
     }
   });
 })();
-[file content end]
