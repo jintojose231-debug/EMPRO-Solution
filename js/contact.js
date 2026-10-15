@@ -27,6 +27,25 @@
   let lastFocused = null;
   let isOpen = false;
 
+  /* ---------- CONTACT OPTIONS (Call / WhatsApp / Email) ---------- */
+  const optButtons = modal.querySelectorAll('[data-contact-tab]');
+  const optPanels  = modal.querySelectorAll('[data-panel]');
+
+  function setTab(name) {
+    optButtons.forEach(btn => {
+      const active = btn.getAttribute('data-contact-tab') === name;
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+    optPanels.forEach(p => {
+      p.hidden = p.getAttribute('data-panel') !== name;
+    });
+  }
+
+  optButtons.forEach(btn => {
+    btn.addEventListener('click', () => setTab(btn.getAttribute('data-contact-tab')));
+  });
+
   /* ---------- OPEN ---------- */
   function openModal() {
     if (isOpen) return;
@@ -34,6 +53,7 @@
     lastFocused = document.activeElement;
 
     // Reset views
+    setTab('email');
     formView.hidden  = false;
     thankView.hidden = true;
     form.reset();
